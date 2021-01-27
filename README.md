@@ -1,0 +1,1 @@
+0x00-shell_basics *contains all the basic commands for the shell exercises 
