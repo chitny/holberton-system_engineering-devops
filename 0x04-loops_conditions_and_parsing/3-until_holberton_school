@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#what is this for
+
+COUNT=10
+until [ $COUNT -lt 1 ]
+do
+    echo "Holberton School"
+    let COUNT-=1
+done
