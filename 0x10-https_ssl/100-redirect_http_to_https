@@ -1,4 +1,3 @@
-
 global
         log /dev/log    local0
         log /dev/log    local1 notice
@@ -51,7 +50,7 @@ frontend www-http
         default_backend web-backend
 
 frontend www-https
-        bind :443 ssl crt /etc/haproxy/ssl/www.mycli.tech.pem
+        bind :443 ssl crt /etc/letsencrypt/live/www.mycli.tech-0001/fullchain.pem
         reqadd X-Forwarded-Proto:\ https
         default_backend web-backend
 
