@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 # Install your load balancer
 apt-get -y install software-properties-common
-add-apt-repository -y ppa:vbernat/haproxy-1.8
 apt-get -y update
-apt-get -y install haproxy=1.8.\*
+apt install haproxy
 sed -i '/errorfile 504/a listen nachio' /etc/haproxy/haproxy.cfg
 sed -i '/listen nachio/a         bind :80' /etc/haproxy/haproxy.cfg
 sed -i '/bind :80/a         mode http' /etc/haproxy/haproxy.cfg
 sed -i '/mode http/a         server 2771-web-01 35.229.29.71:80 check' /etc/haproxy/haproxy.cfg
-sed -i '/server 2771-web-01 34.74.93.165:80 check/a         server 2771-web-02 34.138.210.10:80 check' /etc/haproxy/haproxy.cfg
+sed -i '/server 2771-web-01 35.229.29.71:80 check/a         server 2771-web-02 34.138.210.10:80 check' /etc/haproxy/haproxy.cfg
 sed -i '/#EXTRAOPTS="-de -m 16"/a ENABLED=1' /etc/default/haproxy
 service haproxy start
