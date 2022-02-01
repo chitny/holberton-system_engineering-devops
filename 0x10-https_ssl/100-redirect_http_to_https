@@ -41,8 +41,8 @@ listen mycli
         bind :80
         mode http
         balance roundrobin
-        server 2771-web-01 34.74.93.165:80 check
-        server 2771-web-02 35.196.51.18:80 check
+        server 2771-web-01 35.229.29.71:80 check
+        server 2771-web-02 34.138.210.10:80 check
 
 frontend www-http
         bind :80
@@ -56,5 +56,5 @@ frontend www-https
 
 backend web-backend
         http-request redirect scheme https code 301 if !{ ssl_fc }
-        server 2771-web-01 34.74.93.165:80 check
-        server 2771-web-02 35.196.51.18:80 check
+        server 2771-web-01 35.229.29.71:80 check
+        server 2771-web-02 34.138.210.10:80 check
