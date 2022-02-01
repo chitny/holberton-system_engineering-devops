@@ -5,9 +5,10 @@ Descripcion del modulo
 
 """
 
+import csv
 import requests
 import sys
-import csv
+
 
 if __name__ == "__main__":
 
