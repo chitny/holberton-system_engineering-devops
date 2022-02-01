@@ -5,9 +5,10 @@ Descripcion del modulo
 
 """
 
+import json
 import requests
 import sys
-import csv
+
 
 if __name__ == "__main__":
 
@@ -15,17 +16,20 @@ if __name__ == "__main__":
     userName = requests.get("https://jsonplaceholder.typicode.com/users/{}"
                             .format(userId))
 
-    name = userName.json().get('username')
-
     todos = requests.get('https://jsonplaceholder.typicode.com/todos')
-    totalTodo = 0
-    doneTodo = 0
+    todos = todos.json()
 
-    filename = userId + '.csv'
+    todosUser = {}
+    tasksList = []
+
+    for task in todos:
+        if task.get('userId') == int(userId):
+            taskDict = {"task": task.get('title'),
+                        "completed": task.get('completed'),
+                        "username": userName.json().get('username')}
+            tasksList.append(taskDict)
+    todosUser[userId] = tasksList
+
+    filename = userId + '.json'
     with open(filename, mode='w') as f:
-        writer = csv.writer(f, delimiter=',', quotechar='"',
-                            quoting=csv.QUOTE_ALL, lineterminator='\n')
-        for task in todos.json():
-            if task.get('userId') == int(userId):
-                writer.writerow([userId, name, str(task.get('completed')),
-                                 task.get('title')])
+        json.dump(todosUser, f)
